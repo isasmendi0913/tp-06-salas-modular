@@ -1,0 +1,50 @@
+// middleware específico de reservas
+const salasPermitidas = ["Sala Norte", "Sala Sur", "Sala Multimedia"];
+const turnosPermitidos = ["Mañana", "Tarde", "Noche"];
+
+// define la sección para las vistas del área
+function prepararAreaReservas(req, res, next) {
+  res.locals.seccion = "Reservas de salas";
+  next();
+}
+
+// valida el cuerpo del formulario
+function validarReserva(req, res, next) {
+  const valores = req.body ?? {};
+  const estudiante = String(valores.estudiante ?? "").trim();
+  const email = String(valores.email ?? "").trim();
+  const sala = String(valores.sala ?? "").trim();
+  const fecha = String(valores.fecha ?? "").trim();
+  const turno = String(valores.turno ?? "").trim();
+  const personas = Number(valores.personas);
+
+  const invalido =
+    !estudiante ||
+    !email.includes("@") ||
+    !salasPermitidas.includes(sala) ||
+    !fecha ||
+    !turnosPermitidos.includes(turno) ||
+    !Number.isInteger(personas) ||
+    personas < 1 ||
+    personas > 6;
+
+  if (invalido) {
+    return res.status(400).render("reservas/nueva", {
+      titulo: "Nueva reserva",
+      error: "Completá todos los campos con valores válidos.",
+      valores,
+      salasPermitidas,
+      turnosPermitidos,
+    });
+  }
+
+  req.reservaValidada = { estudiante, email, sala, fecha, turno, personas };
+  next();
+}
+
+module.exports = {
+  prepararAreaReservas,
+  validarReserva,
+  salasPermitidas,
+  turnosPermitidos,
+};

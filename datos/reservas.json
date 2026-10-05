@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "estudiante": "Camila Ríos",
+    "email": "camila@ejemplo.com",
+    "sala": "Sala Norte",
+    "fecha": "2026-09-20",
+    "turno": "Mañana",
+    "personas": 2
+  },
+  {
+    "id": 2,
+    "estudiante": "Diego Fernández",
+    "email": "diego@ejemplo.com",
+    "sala": "Sala Sur",
+    "fecha": "2026-09-21",
+    "turno": "Tarde",
+    "personas": 4
+  },
+  {
+    "id": 3,
+    "estudiante": "Lucía Gómez",
+    "email": "lucia@ejemplo.com",
+    "sala": "Sala Multimedia",
+    "fecha": "2026-09-22",
+    "turno": "Noche",
+    "personas": 3
+  },
+  {
+    "id": 4,
+    "estudiante": "Martín Sosa",
+    "email": "martin@ejemplo.com",
+    "sala": "Sala Norte",
+    "fecha": "2026-09-23",
+    "turno": "Tarde",
+    "personas": 1
+  }
+]

@@ -1,0 +1,57 @@
+<!-- formulario de nueva reserva -->
+<section class="panel-formulario">
+
+  <!-- sección -->
+  <p class="etiqueta"><%= seccion %></p>
+
+  <!-- título -->
+  <h1><%= titulo %></h1>
+
+  <!-- mensaje de error -->
+  <% if (error) { %>
+    <p class="error" role="alert"><%= error %></p>
+  <% } %>
+
+  <!-- formulario -->
+  <form action="/reservas" method="post" class="formulario">
+
+    <!-- campo estudiante -->
+    <label for="estudiante">Estudiante</label>
+    <input id="estudiante" name="estudiante" type="text" value="<%= valores.estudiante ?? '' %>" required>
+
+    <!-- campo email -->
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" value="<%= valores.email ?? '' %>" required>
+
+    <!-- campo sala -->
+    <label for="sala">Sala</label>
+    <select id="sala" name="sala" required>
+      <option value="">Seleccioná una sala</option>
+      <% salasPermitidas.forEach((s) => { %>
+        <option value="<%= s %>" <%= valores.sala === s ? "selected" : "" %>><%= s %></option>
+      <% }) %>
+    </select>
+
+    <!-- campo fecha -->
+    <label for="fecha">Fecha</label>
+    <input id="fecha" name="fecha" type="date" value="<%= valores.fecha ?? '' %>" required>
+
+    <!-- campo turno -->
+    <label for="turno">Turno</label>
+    <select id="turno" name="turno" required>
+      <option value="">Seleccioná un turno</option>
+      <% turnosPermitidos.forEach((t) => { %>
+        <option value="<%= t %>" <%= valores.turno === t ? "selected" : "" %>><%= t %></option>
+      <% }) %>
+    </select>
+
+    <!-- campo personas -->
+    <label for="personas">Cantidad de personas</label>
+    <input id="personas" name="personas" type="number" min="1" max="6" step="1" value="<%= valores.personas ?? '' %>" required>
+
+    <!-- botón enviar -->
+    <button type="submit">Reservar</button>
+
+  </form>
+
+</section>

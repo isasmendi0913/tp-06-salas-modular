@@ -1,0 +1,29 @@
+// middleware global de solicitudes
+let numeroDeSolicitud = 0;
+
+// genera un identificador por solicitud
+function crearIdentificadorSolicitud() {
+  return function identificarSolicitud(req, res, next) {
+    numeroDeSolicitud += 1;
+    res.locals.solicitudId = `BIB-${String(numeroDeSolicitud).padStart(4, "0")}`;
+    next();
+  };
+}
+
+// mide la duración hasta el evento finish
+function medirDuracion(req, res, next) {
+  const inicio = process.hrtime.bigint();
+
+  res.on("finish", () => {
+    const fin = process.hrtime.bigint();
+    const ms = Number(fin - inicio) / 1_000_000;
+    console.log(
+      `[${res.locals.solicitudId}] ${req.method} ${req.originalUrl} ` +
+        `${res.statusCode} ${ms.toFixed(2)} ms`,
+    );
+  });
+
+  next();
+}
+
+module.exports = { crearIdentificadorSolicitud, medirDuracion };

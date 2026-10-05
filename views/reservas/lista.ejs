@@ -1,0 +1,48 @@
+<!-- listado de reservas -->
+<header class="cabecera-pagina">
+  <div>
+
+    <!-- sección -->
+    <p class="etiqueta"><%= seccion %></p>
+
+    <!-- título -->
+    <h1><%= titulo %></h1>
+
+  </div>
+
+  <!-- botón nueva reserva -->
+  <a class="boton" href="/reservas/nueva">Nueva reserva</a>
+</header>
+
+<!-- estado vacío -->
+<% if (reservas.length === 0) { %>
+  <p class="estado-vacio">No hay reservas para mostrar.</p>
+
+<!-- grilla de tarjetas -->
+<% } else { %>
+  <section class="grilla">
+
+    <!-- recorrido de reservas -->
+    <% reservas.forEach((r) => { %>
+      <article class="tarjeta">
+
+        <!-- sala -->
+        <p class="etiqueta"><%= r.sala %></p>
+
+        <!-- estudiante -->
+        <h2><%= r.estudiante %></h2>
+
+        <!-- fecha y turno -->
+        <p><%= r.fecha %> — <%= r.turno %></p>
+
+        <!-- personas -->
+        <p><%= r.personas %> persona<%= r.personas === 1 ? "" : "s" %></p>
+
+        <!-- enlace detalle -->
+        <a href="/reservas/<%= r.id %>">Ver detalle</a>
+
+      </article>
+    <% }) %>
+
+  </section>
+<% } %>
